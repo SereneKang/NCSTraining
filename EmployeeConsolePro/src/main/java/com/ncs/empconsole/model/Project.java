@@ -1,14 +1,25 @@
 package com.ncs.empconsole.model;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
-import org.springframework.stereotype.Component;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
+@Entity
 public class Project implements Serializable,Comparable<Project> {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int projectNumber;
 	private String projectName;
 	private int cost;
@@ -17,9 +28,13 @@ public class Project implements Serializable,Comparable<Project> {
 	private String comments;
 	private String projectHeadEmail;
 	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="projectInfo")
+	private Set<Employee> allEmployees;
+	
 	public Project() {
 		super();
-		
+		// TODO Auto-generated constructor stub
 	}
 
 	public Project(int projectNumber, String projectName, int cost, String startdate, String enddate, String comments,
@@ -38,6 +53,20 @@ public class Project implements Serializable,Comparable<Project> {
 		super();
 		this.projectNumber = projectNumber;
 		this.projectName = projectName;
+	}
+
+	
+	
+
+
+	public Set<Employee> getAllEmployees() {
+		System.err.println(" ** Get All Employees Called ** "+this.allEmployees);
+		return allEmployees;
+	}
+
+	public void setAllEmployees(Set<Employee> allEmployees) {
+		System.err.println(" ** Set All Employees Called ** "+allEmployees);
+		this.allEmployees = allEmployees;
 	}
 
 	public int getProjectNumber() {

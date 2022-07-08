@@ -5,7 +5,9 @@ import java.util.NoSuchElementException;
 
 
 import com.ncs.empconsole.exception.OutofRangeSalaryException;
+import com.ncs.empconsole.model.Department;
 import com.ncs.empconsole.model.Employee;
+import com.ncs.empconsole.model.Laptop;
 
 public interface EmployeeService {
 
@@ -19,4 +21,6 @@ public interface EmployeeService {
 	public Employee getProject(int searchEmpId,int projectId);
 	public boolean deleteEmpById(int id);
 	
+	public Employee updateDepartment(int searchEmpId,Department department);
+	public Employee updateLaptop(int searchEmpId,Laptop laptop);
 }
