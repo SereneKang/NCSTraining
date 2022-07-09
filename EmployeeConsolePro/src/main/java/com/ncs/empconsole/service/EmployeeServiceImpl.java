@@ -125,14 +125,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return e;
 	}
 
-	@Override
-	public Employee updateLaptop(int searchEmpId, Laptop laptop) {
-		Employee e = getEmployeeDetails(searchEmpId);
-		e.setLaptop(laptop);
-		
-		employeeRepository.save(e);
-		return e;
-	}
+
 
 	
 	

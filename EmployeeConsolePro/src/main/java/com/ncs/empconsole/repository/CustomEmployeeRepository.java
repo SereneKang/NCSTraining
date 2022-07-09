@@ -2,7 +2,7 @@ package com.ncs.empconsole.repository;
 
 import java.util.List;
 
-
+import com.ncs.empconsole.model.Department;
 import com.ncs.empconsole.model.Employee;
 
 
@@ -14,5 +14,6 @@ public interface CustomEmployeeRepository {
 	public boolean updateProject(int searchEmpId,int projectId);
 	
 	public boolean updateDepartment(int searchEmpId,int projectId);
-	
+	public boolean deleteDepartment(Department d);
+
 }

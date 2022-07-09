@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.ncs.empconsole.model.Department;
 
 @Repository
-public interface DepartmentRepository extends JpaRepository<Department, Integer> {
+public interface DepartmentRepository extends JpaRepository<Department, Integer>,CustomEmployeeRepository
+{
 
+	
 }

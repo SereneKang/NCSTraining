@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-
+import com.ncs.empconsole.model.Department;
 import com.ncs.empconsole.model.Employee;
 
 
@@ -20,7 +20,6 @@ public class CustomEmployeeRepositoryImpl implements CustomEmployeeRepository{
 	// Session in hibernate 
 	
 
-	
 	@Override
 	public Employee getEmployeeDetails(String searchedEmpName) throws NoSuchElementException{
 		
@@ -77,7 +76,26 @@ public class CustomEmployeeRepositoryImpl implements CustomEmployeeRepository{
 		
 		
 		return (x==1)?true:false;
+		
+		
 	}
+
+	@Override
+	@Transactional
+	public boolean deleteDepartment(Department d) {
+		
+		String query = "Update Employee set department = :nullValue "+"where department = :deptCode";
+		Query q = springDataJPA.createQuery(query);
+		q.setParameter("nullValue", null);
+		q.setParameter("deptCode", d);
+		q.executeUpdate();
+		return true;
+		
+	}
+
+
+
+
 	
 	
 

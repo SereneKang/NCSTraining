@@ -7,6 +7,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,11 +26,11 @@ import com.ncs.empconsole.model.Laptop;
 import com.ncs.empconsole.model.Project;
 import com.ncs.empconsole.service.DepartmentService;
 import com.ncs.empconsole.service.EmployeeService;
-import com.ncs.empconsole.service.LaptopService;
 import com.ncs.empconsole.service.ProjectService;
 
 @RestController
 @RequestMapping("/empconsole/hr")
+@Validated
 public class HREmployeeController {
 	
 	@Autowired
@@ -38,9 +39,7 @@ public class HREmployeeController {
 	@Autowired
 	DepartmentService departmentService;
 	
-	@Autowired
-	LaptopService laptopService;
-	
+
 	@Autowired
 	ProjectService projectService;
 	
@@ -156,27 +155,6 @@ public class HREmployeeController {
 		return null;
 	}
 	
-	@PostMapping("/laptop")
-	public Laptop addLaptop(@RequestBody Laptop laptop) {
-		return laptopService.addLaptop(laptop);
-	}
-	
-	@GetMapping("/laptop/{lcode}")
-	public Laptop getLaptopById(@PathVariable int lcode) {
-		return laptopService.getLaptopById(lcode);
-	}
-	
-	@PutMapping("/employee/{eID}/l3aptop")
-	public Employee updateEmpLaptop(@PathVariable int eID, @RequestParam int lcode) {
-		
-		Laptop l=laptopService.getLaptopById(lcode);
-		
-		if(l!=null) {
-			Employee e=empService.updateLaptop(eID, l);
-			return e;
-		}
-		return null;
-	}
 	
 
 	@GetMapping("/departments")
@@ -184,10 +162,21 @@ public class HREmployeeController {
 		return departmentService.getAllDepartments();
 	}
 	
-	@GetMapping("/laptops")
-	public List<Laptop> getAllLaptop(){
-		return laptopService.getAllLaptop();
+	@DeleteMapping("/departmentDelete/{dcode}")
+	public String deleteDeptByID(@PathVariable int dcode) {
+		
+		String noti=null; 
+		boolean status=departmentService.deleteDepartment(dcode);
+		System.err.println("---> 4. HR controller ");
+		if(!status) {
+			noti="Delete successfully!";
+		}else {
+			noti="Something wrong....";
+		}
+		return noti;
+		
 	}
+	
 	
 	@PostMapping("/project")
 	public Project addProject(@RequestBody Project project)
@@ -246,5 +235,8 @@ public class HREmployeeController {
 			 throw new Exception("Invalid Project ID or no Employee Allocated");
 		 }
 	}
+	
+
+	
 	
 }//end class

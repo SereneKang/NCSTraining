@@ -22,5 +22,5 @@ public interface EmployeeService {
 	public boolean deleteEmpById(int id);
 	
 	public Employee updateDepartment(int searchEmpId,Department department);
-	public Employee updateLaptop(int searchEmpId,Laptop laptop);
+	
 }

@@ -17,17 +17,6 @@ public class AllExceptionHandler
 	}
 
 	@ExceptionHandler
-	public ResponseEntity<ExceptionTemplate> handleIllegalArgumentExceptionTemplateData(IllegalArgumentException e)
-	{
-		ExceptionTemplate template = new ExceptionTemplate();
-		template.setMsg(e.getMessage());
-		template.setUserInput("");
-		template.setDateTime(LocalDateTime.now());
-		
-		return new ResponseEntity<ExceptionTemplate>(template,HttpStatus.BAD_REQUEST);
-	}
-	
-	@ExceptionHandler
 	public ResponseEntity<ExceptionTemplate> handleNoSuchElementExceptionTemplateData(java.util.NoSuchElementException e)
 	{
 		System.out.println("--->> Inside Exeption Handler : NoSuchElement ");
@@ -53,18 +42,6 @@ public class AllExceptionHandler
 	
 	@ExceptionHandler
 	public ResponseEntity<ExceptionTemplate> handleNullPointerExceptionTemplateData(NullPointerException e)
-	{
-		System.out.println("--->> Inside Exeption Handler : Out of Salary Range ");
-		ExceptionTemplate template = new ExceptionTemplate();
-		template.setMsg(e.getMessage());
-		template.setUserInput(e.toString());
-		template.setDateTime(LocalDateTime.now());
-		
-		return new ResponseEntity<ExceptionTemplate>(template,HttpStatus.BAD_REQUEST);
-	}
-	
-	@ExceptionHandler
-	public ResponseEntity<ExceptionTemplate> handleExceptions(Exception e)
 	{
 		System.out.println("--->> Inside Exeption Handler : Out of Salary Range ");
 		ExceptionTemplate template = new ExceptionTemplate();
